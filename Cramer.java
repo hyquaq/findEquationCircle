@@ -5,29 +5,30 @@ public class Cramer {
         this.equation = new Equation(a, b, c);
     }
 
+    public Cramer(Equation other) {
+        this.equation = other;
+    }
+
     public Equation getEquation() {
         return this.equation;
     }
 
-    public Point solve(Cramer other) {
+    public Point solve(Equation other) {
         Point result = new Point();
-        double d = this.equation.getA() * other.equation.getB() - other.equation.getA() * this.equation.getB();
-        double dx = this.equation.getC() * other.equation.getB() - other.equation.getC() * this.equation.getB();
-        double dy = this.equation.getA() * other.equation.getC() - other.equation.getA() * this.equation.getC();
+        double d = this.equation.getA() * other.getB() - other.getA() * this.equation.getB();
+        double dx = this.equation.getC() * other.getB() - other.getC() * this.equation.getB();
+        double dy = this.equation.getA() * other.getC() - other.getA() * this.equation.getC();
         if (d == 0) {
             if (dx == dy) {
-                System.out.println("Invalid");
+                return null;
             } else {
-                System.out.println("Invalid1");
+                return null;
             }
         } else {
+            // nghiem cua he phuong trinh
             result.setX(dx / d);
             result.setY(dy / d);
-            double r = Math.sqrt(Math.pow(ix - point.get(0), 2) + Math.pow(iy - point.get(1), 2));
-            System.out.println(
-                    String.format("Phuong trinh duong tron co dang (x - %f)^2 + (y - %f)^2 = %f^2", ix, iy, r));
         }
         return result;
     }
-
 }
